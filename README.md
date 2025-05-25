@@ -202,7 +202,7 @@ $$
 - **用法**：
 
   ```bash
-  python data2dag.py --input your.bag --output output_folder/
+  python sensordata_to_rosbag_fastlio.py --input your.bag --output output_folder/
   ```
 
   > 参数说明见脚本内注释。
@@ -213,18 +213,18 @@ $$
 - **功能**：将rosbag中的PointCloud2消息批量转换为PCD文件，供SLAM算法使用。
 - **用法**：
   ```bash
-  python bag2pcd.py --input your.bag --topic /velodyne_points --output pcd_folder/
+  rosbag2pcd.m
   ```
 
 ### 3. RTK数据处理
 
 进入 `2012-01-22_sen` 目录，运行MATLAB脚本：
 
-- **主要脚本**：如 `rtk_process.m`
+- **主要脚本**：如 `etk_main.m`
 - **功能**：解析RTK原始数据，输出高精度定位结果（如经纬度、UTM坐标等）。
 - **用法**：
   ```matlab
-  rtk_process
+  ekf_main
   ```
 
 ### 4. SLAM主流程
@@ -236,8 +236,6 @@ $$
 - **用法**：
   ```matlab
   main
-  % 或
-  slam_ekf
   ```
 
 ### 5. 结果可视化
@@ -357,6 +355,7 @@ flowchart TD
 - **输入**：源点云、目标点云。
 - **输出**：变换矩阵T。
 - **核心公式**（ICP）：
+
   $$
   \min_{R, t} \sum_{i=1}^N \| R \mathbf{p}_i + \mathbf{t} - \mathbf{q}_i \|^2
   $$
@@ -372,6 +371,7 @@ flowchart TD
 - **输入**：源点云、目标点云。
 - **输出**：两帧之间的相对变换。
 - **FPFH特征提取公式**：
+
   $$
   \mathrm{FPFH}(\mathbf{p}) = \frac{1}{|\mathcal{N}(\mathbf{p})|} \sum_{\mathbf{q} \in \mathcal{N}(\mathbf{p})} \mathrm{SPFH}(\mathbf{q})
   $$
@@ -386,6 +386,7 @@ flowchart TD
 - **输入**：每帧位姿、回环信息。
 - **输出**：位姿图数据结构。
 - **公式**（节点/边）：
+
   $$
   \mathbf{x}_i = [R_i, \mathbf{t}_i] \\
   \mathbf{e}_{ij} = \mathbf{x}_j \ominus (\mathbf{x}_i \oplus \mathbf{z}_{ij})
@@ -410,6 +411,7 @@ flowchart TD
 - **输入**：回环候选帧的点云和位姿。
 - **输出**：回环有效性判断。
 - **公式**（配准误差）：
+
   $$
   e = \| T_{ij}^{\text{估计}} - T_{ij}^{\text{测量}} \|
   $$
@@ -424,6 +426,7 @@ flowchart TD
 - **输入**：位姿图（节点和边）。
 - **输出**：优化后的全局位姿。
 - **核心公式**（非线性最小二乘）：
+
   $$
   \min_{\mathbf{x}} \sum_{(i,j) \in C} \| \mathbf{e}_{ij} \|^2
   $$
@@ -438,6 +441,7 @@ flowchart TD
 - **输入**：点云、位姿。
 - **输出**：地图点云。
 - **公式**（点云坐标变换）：
+
   $$
   \mathbf{p}_{\text{global}} = R \cdot \mathbf{p}_{\text{local}} + \mathbf{t}
   $$
@@ -461,6 +465,7 @@ flowchart TD
 - **输入**：配准前后点云、变换矩阵。
 - **输出**：配准误差、评估指标。
 - **公式**（均方根误差 RMSE）：
+
   $$
   \mathrm{RMSE} = \sqrt{ \frac{1}{N} \sum_{i=1}^N \| T(\mathbf{p}_i) - \mathbf{q}_i \|^2 }
   $$
@@ -500,6 +505,8 @@ flowchart TD
 - **输入**：点云文件路径/文件夹路径。
 - **输出**：点云数据/序列。
 
+---
+
 ## 贡献与许可
 
 欢迎提出建议与贡献代码。
@@ -510,7 +517,7 @@ flowchart TD
 如有问题或建议，请通过以下方式联系：
 
 - 邮箱：[3376008507@qq.com]
-- GitHub Issues：[]
+- GitHub Issues：[https://github.com/yhx123sb/SLAM-EKF-RTK.git]
 
 ## 更新日志
 
