@@ -6,8 +6,7 @@
 - **指导教师**：[教师姓名]
 - **完成时间**：2025/4/15-2025/5/24
 - **小组成员**：
-  - [成员1]：负责RTK数据处理与EKF实现
-  - [成员2]：负责激光雷达SLAM算法实现
+  - [成员1]：负责RTK数据处理与EKF实现，负责激光雷达SLAM算法实现
 
 ## 项目特色
 
@@ -587,3 +586,4 @@ flowchart TD
    4. 地图构建（buildLocalMap.m、buildGlobalMap.m、removeRedundancy.m）
    5. 融合与评估（EKF融合、evaluateRegistration.m）
    6. 结果保存与可视化（saveMap.m、visualizeResults.m）
+我服了，怎么会有这样的人，这整个项目都是我做的，非要强行把别人的名字加进来，我真服了
